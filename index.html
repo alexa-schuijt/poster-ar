@@ -8,18 +8,12 @@
 
 <body style="margin: 0; overflow: hidden;">
     <a-scene embedded arjs>
-
-        <!-- Assets go here -->
         <a-assets>
-            <video id="vid" src="shoppinglol.mp4" autoplay loop muted playsinline></video>
+            <video id="vid" src="shoppinglol.mp4" loop muted playsinline webkit-playsinline></video>
         </a-assets>
 
-        <!-- Marker -->
         <a-marker type="pattern" url="kylee_try1-02.patt">
-
-            <a-video src="#vid" position="0 0.5 0" rotation="-90 0 0" width="1.5" height="1">
-            </a-video>
-
+            <a-video src="#vid" position="0 0.5 0" rotation="-90 0 0" width="1.5" height="1"></a-video>
         </a-marker>
 
         <a-entity camera></a-entity>

@@ -11,24 +11,23 @@
     const video = document.querySelector("#vid");
 
     marker.addEventListener("markerFound", () => {
-        video.play().catch(e => console.log(e));
+        video.play().catch(err => {
+            console.log("Video play blocked, waiting for interaction:", err);
+        });
     });
 </script>
 
 <body style="margin: 0; overflow: hidden;">
     <a-scene embedded arjs>
 
-        <!-- Assets go here -->
         <a-assets>
             <video id="vid" src="shoppinglol.mp4" loop muted playsinline webkit-playsinline>
             </video>
         </a-assets>
 
         <a-marker type="pattern" url="kylee_try1-02.patt">
-
-            <a-video src="#vid" position="0 0.5 0" rotation="-90 0 0" width="1.5" height="1">
+            <a-video src="#vid" width="1.5" height="1" position="0 0.5 0" rotation="-90 0 0">
             </a-video>
-
         </a-marker>
 
         <a-entity camera></a-entity>

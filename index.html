@@ -13,9 +13,12 @@
         <a-marker type="pattern" url="kylee_try1-02.patt">
 
             <!-- Animated object -->
-            <a-box position="0 0.5 0" color="blue">
-                <a-animation attribute="rotation" to="0 360 0" loop="true" dur="2000"></a-animation>
-            </a-box>
+            <a-video src="#vid" position="0 0.5 0" rotation="-90 0 0" width="1.5" height="1">
+            </a-video>
+
+            <a-assets>
+                <video id="vid" src="shoppinglol.mp4" autoplay loop muted playsinline></video>
+            </a-assets>
 
         </a-marker>
 

@@ -45,6 +45,7 @@
         // Fallback: play on tap
         function playVideo() {
             const video = document.querySelector("#vid");
+            video.muted = false;   // 🔊 turn sound ON
             video.play();
         }
     </script>

@@ -34,9 +34,12 @@
         function playVideo() {
             const video = document.querySelector("#vid");
 
-            video.muted = false;   // turn sound ON
-            video.currentTime = 0; // start from beginning
-            video.play();
+            if (video.paused) {
+                video.muted = false;   // enable sound
+                video.play();
+            } else {
+                video.pause();         // stop video
+            }
         }
     </script>
 

@@ -30,22 +30,12 @@
 
     <!-- JS (waits until everything is loaded) -->
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const marker = document.querySelector("a-marker");
-            const video = document.querySelector("#vid");
 
-            // Play when marker is detected
-            marker.addEventListener("markerFound", () => {
-                if (video.paused) {
-                    video.play().catch(e => console.log("Video blocked:", e));
-                }
-            });
-        });
-
-        // Fallback: play on tap
         function playVideo() {
             const video = document.querySelector("#vid");
-            video.muted = false;   // 🔊 turn sound ON
+
+            video.muted = false;   // turn sound ON
+            video.currentTime = 0; // start from beginning
             video.play();
         }
     </script>

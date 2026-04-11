@@ -4,10 +4,26 @@
 <head>
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+    <style>
+        #tapOverlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 24px;
+            font-family: Arial, sans-serif;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 12px 20px;
+            border-radius: 8px;
+            z-index: 999;
+        }
+    </style>
 </head>
 
 <body style="margin: 0; overflow: hidden;" onclick="playVideo()">
-
+    <div id="tapOverlay">Tap to start</div>
     <a-scene embedded arjs>
 
         <!-- Video asset -->
@@ -34,18 +50,15 @@
     <script>
 
 
-        document.addEventListener("DOMContentLoaded", function () {
-            const marker = document.querySelector("a-marker");
-            const text = document.querySelector("#tapText");
+        function playVideo() {
+            const video = document.querySelector("#vid");
+            const overlay = document.querySelector("#tapOverlay");
 
-            marker.addEventListener("markerFound", () => {
-                text.setAttribute("visible", true);
+            video.muted = false;
+            video.play();
 
-                setTimeout(() => {
-                    text.setAttribute("visible", false);
-                }, 6000); // disappears after 6 seconds
-            });
-        });
+            overlay.style.display = "none"; // hide text
+        }
 
 
         function playVideo() {

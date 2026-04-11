@@ -19,7 +19,8 @@
         <!-- Marker -->
         <a-marker type="pattern" url="pattern-appicon.patt" smooth="true" smoothCount="10" smoothTolerance="0.01"
             smoothThreshold="5">
-
+            <a-text value="Tap to start" position="0 1 0" align="center" color="white" width="4" id="tapText">
+            </a-text>
             <!-- Video plane (upright + slightly forward) -->
             <a-video src="#vid" position="0 4 0.01" rotation="-90 0 0" width="6" height="3.4">
             </a-video>
@@ -31,6 +32,21 @@
 
     <!-- JS (waits until everything is loaded) -->
     <script>
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const marker = document.querySelector("a-marker");
+            const text = document.querySelector("#tapText");
+
+            marker.addEventListener("markerFound", () => {
+                text.setAttribute("visible", true);
+
+                setTimeout(() => {
+                    text.setAttribute("visible", false);
+                }, 2000); // disappears after 2 seconds
+            });
+        });
+
 
         function playVideo() {
             const video = document.querySelector("#vid");

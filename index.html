@@ -54,21 +54,17 @@
             const video = document.querySelector("#vid");
             const overlay = document.querySelector("#tapOverlay");
 
-            video.muted = false;
-            video.play();
-
-            overlay.style.display = "none"; // hide text
-        }
-
-
-        function playVideo() {
-            const video = document.querySelector("#vid");
-
             if (video.paused) {
-                video.muted = false;   // enable sound
+                video.muted = false;
                 video.play();
+
+                // hide overlay on first tap
+                overlay.style.transition = "opacity 0.4s";
+                overlay.style.opacity = "0";
+                setTimeout(() => overlay.style.display = "none", 400);
+
             } else {
-                video.pause();         // stop video
+                video.pause();
             }
         }
     </script>

@@ -43,32 +43,32 @@
         </a-assets>
 
         <!-- 🖼️ ORIGINAL MARKER (UNCHANGED) -->
-        <a-marker type="pattern" url="pattern-appicon.patt" smooth="true" smoothCount="10" smoothTolerance="0.01"
-            smoothThreshold="5">
+        <!-- 🖼️ ORIGINAL MARKER -->
+        <a-marker id="marker1" type="pattern" url="pattern-appicon.patt" smooth="true" smoothCount="10"
+            smoothTolerance="0.01" smoothThreshold="5">
 
             <a-video src="#vid" position="0 4 0.01" rotation="-90 0 0" width="6" height="3.4">
             </a-video>
 
         </a-marker>
 
-        <!-- 🖼️ NEW MARKER 2 -->
-        <a-marker type="pattern" url="pattern-riley_icon.patt" smooth="true" smoothCount="10" smoothTolerance="0.01"
-            smoothThreshold="5">
+        <!-- 🖼️ MARKER 2 -->
+        <a-marker id="marker2" type="pattern" url="pattern-riley_icon.patt" smooth="true" smoothCount="10"
+            smoothTolerance="0.01" smoothThreshold="5">
 
             <a-video src="#vid2" position="0 4 0.01" rotation="-90 0 0" width="6" height="3.4">
             </a-video>
 
         </a-marker>
 
-        <!-- 🖼️ NEW MARKER 3 -->
-        <a-marker type="pattern" url="pattern-poster3.patt" smooth="true" smoothCount="10" smoothTolerance="0.01"
-            smoothThreshold="5">
+        <!-- 🖼️ MARKER 3 -->
+        <a-marker id="marker3" type="pattern" url="pattern-poster3.patt" smooth="true" smoothCount="10"
+            smoothTolerance="0.01" smoothThreshold="5">
 
             <a-video src="#vid3" position="0 4 0.01" rotation="-90 0 0" width="6" height="3.4">
             </a-video>
 
         </a-marker>
-
         <!-- Camera -->
         <a-entity camera></a-entity>
 
@@ -76,27 +76,56 @@
 
     <!-- 🎯 INTERACTION SCRIPT -->
     <script>
+
+        let activeVideo = null;
+
         function playVideo() {
-            const videos = document.querySelectorAll("video");
+
             const overlay = document.querySelector("#tapOverlay");
 
-            videos.forEach(video => {
-                video.muted = false;
+            // figure out which marker is visible
+            const marker1 = document.querySelector("#marker1");
+            const marker2 = document.querySelector("#marker2");
+            const marker3 = document.querySelector("#marker3");
 
-                if (video.paused) {
-                    video.play();
-                } else {
-                    video.pause();
-                }
-            });
+            if (marker1.object3D.visible) {
+                activeVideo = document.querySelector("#vid");
+            }
+            else if (marker2.object3D.visible) {
+                activeVideo = document.querySelector("#vid2");
+            }
+            else if (marker3.object3D.visible) {
+                activeVideo = document.querySelector("#vid3");
+            }
 
-            // fade out overlay once
+            // if no marker visible, do nothing
+            if (!activeVideo) return;
+
+            // toggle play/pause
+            if (activeVideo.paused) {
+
+                activeVideo.muted = false;
+
+                activeVideo.play();
+
+            } else {
+
+                activeVideo.pause();
+
+            }
+
+            // hide overlay
             if (overlay.style.display !== "none") {
+
                 overlay.style.transition = "opacity 0.4s";
                 overlay.style.opacity = "0";
-                setTimeout(() => overlay.style.display = "none", 400);
+
+                setTimeout(() => {
+                    overlay.style.display = "none";
+                }, 400);
             }
         }
+
     </script>
 
 </body>
